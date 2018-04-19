@@ -1,5 +1,5 @@
 import express from 'express';
-import invoiceController from '../controllers/invoice.controller';
+import invoiceController from '../api/controllers/invoice.controller';
 
 export const router = express.Router();
 
