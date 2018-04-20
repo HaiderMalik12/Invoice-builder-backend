@@ -5,3 +5,4 @@ export const router = express.Router();
 
 // Invoices
 router.get('/invoices', invoiceController.findAll);
+router.post('/invoices', invoiceController.create);

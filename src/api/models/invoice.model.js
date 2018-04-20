@@ -8,12 +8,15 @@ const InvoiceSchema = new Schema({
   },
   qty: {
     type: Number,
+    required: true,
   },
   date: {
     type: Date,
+    required: true,
   },
   due: {
     type: Date,
+    required: true,
   },
   rate: {
     type: Number,
