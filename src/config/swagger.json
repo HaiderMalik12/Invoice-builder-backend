@@ -42,6 +42,19 @@
             }
           }
         }
+      },
+      "get": {
+        "tags": ["Invocies"],
+        "summary": "FInd all Invoices from the server",
+        "description": "All invoices",
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "schema": {
+              "$ref": "#definitions/Invoices"
+            }
+          }
+        }
       }
     }
   },
@@ -77,6 +90,10 @@
           "format": "float"
         }
       }
+    },
+    "Invoices": {
+      "type": "array",
+      "$ref": "#definitions/Invoice"
     }
   }
 }
