@@ -18,13 +18,38 @@
   "consumes": ["application/json"],
   "produces": ["application/json"],
   "paths": {
-    "/invoices": {}
+    "/Invoices": {
+      "post": {
+        "tags": ["Invocies"],
+        "description": "Create new Invoice in the System",
+        "parameters": [
+          {
+            "name": "invoice",
+            "description": "Invoice that we want to create invoice",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#definitions/Invoice"
+            }
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "new Invoice is created",
+            "schema": {
+              "$ref": "#definitions/Invoice"
+            }
+          }
+        }
+      }
+    }
   },
   "definitions": {
     "Invoice": {
       "required": ["item, qty, date, due"],
       "properties": {
-        "id": {
+        "_id": {
           "type": "string",
           "uniqueItems": true
         },
