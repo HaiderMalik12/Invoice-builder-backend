@@ -9,6 +9,8 @@ mongoose.connect('mongodb://localhost/invoice-builder');
 const app = express();
 const PORT = 3000;
 
+app.use(express.json());
+app.use(express.urlencoded());
 app.use(logger('dev'));
 app.use('/api', router);
 app.use((req, res, next) => {
