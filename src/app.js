@@ -1,8 +1,10 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import logger from 'morgan';
+import swaggerUi from 'swagger-ui-express';
 
 import { router } from './config/routes';
+import swaggerDocument from './config/swagger.json';
 
 mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://localhost/invoice-builder');
@@ -12,6 +14,13 @@ const PORT = 3000;
 app.use(express.json());
 app.use(express.urlencoded());
 app.use(logger('dev'));
+app.use(
+  '/api-docs',
+  swaggerUi.save,
+  swaggerUi.setup(swaggerDocument, {
+    explorer: true,
+  })
+);
 app.use('/api', router);
 app.use((req, res, next) => {
   const error = new Error('Not found');
