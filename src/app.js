@@ -16,7 +16,7 @@ app.use(express.urlencoded());
 app.use(logger('dev'));
 app.use(
   '/api-docs',
-  swaggerUi.save,
+  swaggerUi.serve,
   swaggerUi.setup(swaggerDocument, {
     explorer: true,
   })

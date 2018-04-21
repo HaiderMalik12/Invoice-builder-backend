@@ -1,1 +1,23 @@
-{}
+{
+  "title": "Invoice Builder API Documentation",
+  "description": "Swagger API Documentation for Invoice Builder MEAN Stack App",
+  "license": {
+    "name": "MIT",
+    "url": "https://opensource.org/licenses/MIT"
+  },
+  "version": "1.0.0",
+  "host": "localhost:3000",
+  "basePath": "/api",
+  "tags": [
+    {
+      "name": "Invocies",
+      "description": "API for Inovice"
+    }
+  ],
+  "schemes": ["http"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
+  "paths": {
+    "/invoices": {}
+  }
+}
