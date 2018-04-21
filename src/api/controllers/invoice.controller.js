@@ -49,4 +49,24 @@ export default {
       })
       .catch(err => res.status(HttpStatus.INTERNAL_SERVER_ERROR).json(err));
   },
+  update(req, res) {
+    const { id } = req.params;
+    const schema = Joi.object().keys({
+      item: Joi.string().optional(),
+      date: Joi.date().optional(),
+      due: Joi.date().optional(),
+      qty: Joi.number()
+        .integer()
+        .optional(),
+      tax: Joi.number().optional(),
+      rate: Joi.number().optional(),
+    });
+    const { error, value } = Joi.validate(req.body, schema);
+    if (error && error.details) {
+      return res.status(HttpStatus.BAD_REQUEST).json(error);
+    }
+    Invoice.findOneAndUpdate({ _id: id }, value, { new: true })
+      .then(invoice => res.json(invoice))
+      .catch(err => res.status(HttpStatus.INTERNAL_SERVER_ERROR).json(err));
+  },
 };
