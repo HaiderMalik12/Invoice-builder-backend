@@ -21,6 +21,7 @@
     "/Invoices": {
       "post": {
         "tags": ["Invocies"],
+        "summary": "Create new Invoice",
         "description": "Create new Invoice in the System",
         "parameters": [
           {
@@ -52,6 +53,29 @@
             "description": "Ok",
             "schema": {
               "$ref": "#definitions/Invoices"
+            }
+          }
+        }
+      }
+    },
+    "/Invoices/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "Id of the Invoice",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "tags": ["Invocies"],
+        "description": "Find the Invocie by id",
+        "summary": "Find single Invoice",
+        "responses": {
+          "200": {
+            "description": "Invoice has found",
+            "schema": {
+              "$ref": "#definitions/Invoice"
             }
           }
         }
