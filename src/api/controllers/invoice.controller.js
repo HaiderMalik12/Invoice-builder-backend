@@ -1,11 +1,12 @@
 import Joi from 'joi';
+import HttpStatus from 'http-status-codes';
 import Invoice from '../models/invoice.model';
 
 export default {
   findAll(req, res, next) {
     Invoice.find()
       .then(invoices => res.json(invoices))
-      .catch(err => res.status(500).json(err));
+      .catch(err => res.status(HttpStatus.INTERNAL_SERVER_ERROR).json(err));
   },
   create(req, res, next) {
     const schema = Joi.object().keys({
@@ -20,10 +21,10 @@ export default {
     });
     const { error, value } = Joi.validate(req.body, schema);
     if (error && error.details) {
-      return res.status(400).json(error);
+      return res.status(HttpStatus.BAD_REQUEST).json(error);
     }
     Invoice.create(value)
       .then(invoice => res.json(invoice))
-      .catch(err => res.status(500).json(err));
+      .catch(err => res.status(HttpStatus.INTERNAL_SERVER_ERROR).json(err));
   },
 };
