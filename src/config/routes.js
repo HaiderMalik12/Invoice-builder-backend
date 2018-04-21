@@ -5,4 +5,5 @@ export const router = express.Router();
 
 // Invoices
 router.get('/invoices', invoiceController.findAll);
+router.get('/invoices/:id', invoiceController.findOne);
 router.post('/invoices', invoiceController.create);

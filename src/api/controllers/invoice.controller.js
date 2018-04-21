@@ -27,4 +27,13 @@ export default {
       .then(invoice => res.json(invoice))
       .catch(err => res.status(HttpStatus.INTERNAL_SERVER_ERROR).json(err));
   },
+  findOne(req, res) {
+    const { id } = req.params;
+    Invoice.findById(id).then(invoice => {
+      if (!invoice) {
+        return res.status(HttpStatus.NOT_FOUND).json({ err: 'Could not find any invoice' });
+      }
+      return res.json(invoice);
+    });
+  },
 };
