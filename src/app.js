@@ -1,5 +1,6 @@
 import express from 'express';
 import mongoose from 'mongoose';
+import logger from 'morgan';
 
 import { router } from './config/routes';
 
@@ -8,6 +9,7 @@ mongoose.connect('mongodb://localhost/invoice-builder');
 const app = express();
 const PORT = 3000;
 
+app.use(logger('dev'));
 app.use('/api', router);
 app.use((req, res, next) => {
   const error = new Error('Not found');
