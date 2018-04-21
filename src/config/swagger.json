@@ -19,5 +19,39 @@
   "produces": ["application/json"],
   "paths": {
     "/invoices": {}
+  },
+  "definitions": {
+    "Invoice": {
+      "required": ["item, qty, date, due"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "uniqueItems": true
+        },
+        "item": {
+          "type": "string"
+        },
+        "qty": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "date": {
+          "type": "string",
+          "format": "date"
+        },
+        "due": {
+          "type": "string",
+          "format": "date"
+        },
+        "rate": {
+          "type": "number",
+          "format": "float"
+        },
+        "tax": {
+          "type": "number",
+          "format": "float"
+        }
+      }
+    }
   }
 }
