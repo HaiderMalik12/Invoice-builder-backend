@@ -4,7 +4,7 @@ export default {
   findAll(req, res, next) {
     Invoice.find().then(invoices => res.json(invoices));
   },
-  create(req, res) {
+  create(req, res, next) {
     const { item, qty, date, due, tax, rate } = req.body;
     if (!item) {
       return res.status(400).json({ err: 'item is required field' });
