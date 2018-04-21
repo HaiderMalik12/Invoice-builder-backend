@@ -79,6 +79,19 @@
             }
           }
         }
+      },
+      "delete": {
+        "tags": ["Invocies"],
+        "description": "Delete the Invocie by id",
+        "summary": "Delete single Invoice",
+        "responses": {
+          "200": {
+            "description": "Invoice has deleted",
+            "schema": {
+              "$ref": "#definitions/Invoice"
+            }
+          }
+        }
       }
     }
   },
