@@ -2,6 +2,7 @@ import express from 'express';
 import mongoose from 'mongoose';
 import logger from 'morgan';
 import swaggerUi from 'swagger-ui-express';
+import cors from 'cors';
 
 import { router } from './config/routes';
 import swaggerDocument from './config/swagger.json';
@@ -13,6 +14,7 @@ const PORT = 3000;
 
 app.use(express.json());
 app.use(express.urlencoded());
+app.use(cors());
 app.use(logger('dev'));
 app.use(
   '/api-docs',
