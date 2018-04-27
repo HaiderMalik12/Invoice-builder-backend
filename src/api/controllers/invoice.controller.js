@@ -4,7 +4,12 @@ import Invoice from '../models/invoice.model';
 
 export default {
   findAll(req, res, next) {
-    Invoice.find()
+    const { page = 1, perPage = 10 } = req.query;
+    const options = {
+      page: parseInt(page, 10),
+      limit: parseInt(perPage, 10),
+    };
+    Invoice.paginate({}, options)
       .then(invoices => res.json(invoices))
       .catch(err => res.status(HttpStatus.INTERNAL_SERVER_ERROR).json(err));
   },
