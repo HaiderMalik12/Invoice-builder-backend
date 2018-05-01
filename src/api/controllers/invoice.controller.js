@@ -4,11 +4,15 @@ import Invoice from '../models/invoice.model';
 
 export default {
   findAll(req, res, next) {
-    const { page = 1, perPage = 10, filter } = req.query;
+    const { page = 1, perPage = 10, filter, sortField, sortDir } = req.query;
     const options = {
       page: parseInt(page, 10),
       limit: parseInt(perPage, 10),
+      sort: {
+        [sortField]: sortDir,
+      },
     };
+    console.log(options);
     const query = {};
     if (filter) {
       query.item = {
