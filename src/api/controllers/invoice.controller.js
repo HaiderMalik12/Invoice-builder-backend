@@ -12,7 +12,6 @@ export default {
         [sortField]: sortDir,
       },
     };
-    console.log(options);
     const query = {};
     if (filter) {
       query.item = {
