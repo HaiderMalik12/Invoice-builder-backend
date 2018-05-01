@@ -8,9 +8,6 @@ export default {
     const options = {
       page: parseInt(page, 10),
       limit: parseInt(perPage, 10),
-      sort: {
-        [sortField]: sortDir,
-      },
     };
     const query = {};
     if (filter) {
@@ -18,6 +15,12 @@ export default {
         $regex: filter,
       };
     }
+    if (sortField && sortDir) {
+      options.sort = {
+        [sortField]: sortDir,
+      };
+    }
+    console.log(options);
     Invoice.paginate(query, options)
       .then(invoices => res.json(invoices))
       .catch(err => res.status(HttpStatus.INTERNAL_SERVER_ERROR).json(err));
