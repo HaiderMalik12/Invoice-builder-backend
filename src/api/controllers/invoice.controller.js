@@ -10,9 +10,7 @@ export default {
       limit: parseInt(perPage, 10),
     };
     Invoice.paginate({}, options)
-      .then(invoices => {
-        setTimeout(() => res.json(invoices), 5000);
-      })
+      .then(invoices => res.json(invoices))
       .catch(err => res.status(HttpStatus.INTERNAL_SERVER_ERROR).json(err));
   },
   create(req, res, next) {
