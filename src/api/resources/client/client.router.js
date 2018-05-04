@@ -7,4 +7,7 @@ clientRouter
   .post(clientController.create)
   .get(clientController.findAll);
 
-clientRouter.route('/:id').get(clientController.findOne);
+clientRouter
+  .route('/:id')
+  .get(clientController.findOne)
+  .delete(clientController.delete);

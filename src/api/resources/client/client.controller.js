@@ -1,4 +1,4 @@
-import { BAD_REQUEST, INTERNAL_SERVER_ERROR } from 'http-status-codes';
+import { BAD_REQUEST, INTERNAL_SERVER_ERROR, NOT_FOUND } from 'http-status-codes';
 import clientService from './client.service';
 import Client from './client.model';
 
@@ -26,9 +26,19 @@ export default {
   async findOne(req, res) {
     try {
       const client = await Client.findById(req.params.id);
+      if (!client) {
+        return res.status(NOT_FOUND).json({ err: 'client not found' });
+      }
       return res.json(client);
     } catch (err) {
       return res.status(INTERNAL_SERVER_ERROR).json(err);
     }
+  },
+  async delete(req, res) {
+    const client = await Client.findOneAndRemove({ _id: req.params.id });
+    if (!client) {
+      return res.status(NOT_FOUND).json({ err: 'could not delete client' });
+    }
+    return res.json(client);
   },
 };
