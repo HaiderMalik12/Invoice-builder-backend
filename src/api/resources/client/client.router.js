@@ -10,4 +10,5 @@ clientRouter
 clientRouter
   .route('/:id')
   .get(clientController.findOne)
-  .delete(clientController.delete);
+  .delete(clientController.delete)
+  .put(clientController.update);

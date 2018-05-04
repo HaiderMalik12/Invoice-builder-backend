@@ -35,10 +35,26 @@ export default {
     }
   },
   async delete(req, res) {
-    const client = await Client.findOneAndRemove({ _id: req.params.id });
-    if (!client) {
-      return res.status(NOT_FOUND).json({ err: 'could not delete client' });
+    try {
+      const client = await Client.findOneAndRemove({ _id: req.params.id });
+      if (!client) {
+        return res.status(NOT_FOUND).json({ err: 'could not delete client' });
+      }
+      return res.json(client);
+    } catch (err) {
+      return res.status(INTERNAL_SERVER_ERROR).json(err);
     }
-    return res.json(client);
+  },
+  async update(req, res) {
+    try {
+      const { value, error } = clientService.validateUpdateSchema(req.body);
+      if (error && error.details) {
+        return res.status(BAD_REQUEST).json(error);
+      }
+      const client = await Client.findOneAndUpdate({ _id: req.params.id }, value, { new: true });
+      return res.json(client);
+    } catch (err) {
+      return res.status(INTERNAL_SERVER_ERROR).json(err);
+    }
   },
 };
