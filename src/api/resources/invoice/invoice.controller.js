@@ -8,6 +8,7 @@ export default {
     const options = {
       page: parseInt(page, 10),
       limit: parseInt(perPage, 10),
+      populate: 'client',
     };
     const query = {};
     if (filter) {
