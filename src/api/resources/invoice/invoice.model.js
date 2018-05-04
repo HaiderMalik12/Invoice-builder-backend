@@ -25,6 +25,11 @@ const InvoiceSchema = new Schema({
   tax: {
     type: Number,
   },
+  client: {
+    ref: 'Client',
+    type: Schema.Types.ObjectId,
+    required: true,
+  },
 });
 InvoiceSchema.plugin(mongoosePaginate);
 export default mongoose.model('Invoice', InvoiceSchema);

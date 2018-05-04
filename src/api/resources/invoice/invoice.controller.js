@@ -30,6 +30,7 @@ export default {
       item: Joi.string().required(),
       date: Joi.date().required(),
       due: Joi.date().required(),
+      client: Joi.string().required(),
       qty: Joi.number()
         .integer()
         .required(),
