@@ -6,3 +6,5 @@ clientRouter
   .route('/')
   .post(clientController.create)
   .get(clientController.findAll);
+
+clientRouter.route('/:id').get(clientController.findOne);

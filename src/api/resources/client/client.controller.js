@@ -22,5 +22,13 @@ export default {
     } catch (err) {
       return res.status(INTERNAL_SERVER_ERROR).json(err);
     }
-  }
+  },
+  async findOne(req, res) {
+    try {
+      const client = await Client.findById(req.params.id);
+      return res.json(client);
+    } catch (err) {
+      return res.status(INTERNAL_SERVER_ERROR).json(err);
+    }
+  },
 };
