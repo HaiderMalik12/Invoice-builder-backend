@@ -79,6 +79,7 @@ export default {
         .optional(),
       tax: Joi.number().optional(),
       rate: Joi.number().optional(),
+      client: Joi.string().optional(),
     });
     const { error, value } = Joi.validate(req.body, schema);
     if (error && error.details) {
