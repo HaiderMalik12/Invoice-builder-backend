@@ -153,8 +153,26 @@
     }
   },
   "definitions": {
+    "Client": {
+      "required": ["firstName", "lastName", "email"],
+      "properties": {
+        "_id": {
+          "type": "string",
+          "uniqueItems": true
+        },
+        "firstName": {
+          "type": "string"
+        },
+        "lastName": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        }
+      }
+    },
     "Invoice": {
-      "required": ["item, qty, date, due", "client"],
+      "required": ["item", "qty", "date", "due", "client"],
       "properties": {
         "_id": {
           "type": "string",
