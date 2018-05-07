@@ -62,6 +62,67 @@
         }
       }
     },
+    "/Clients/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "Id of the Client",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "tags": ["Clients"],
+        "description": "Find the Client by id",
+        "summary": "Find single Client",
+        "responses": {
+          "200": {
+            "description": "Client has found",
+            "schema": {
+              "$ref": "#definitions/Client"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Clients"],
+        "description": "Delete the Client by id",
+        "summary": "Delete single Client",
+        "responses": {
+          "200": {
+            "description": "Client has deleted",
+            "schema": {
+              "$ref": "#definitions/Client"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": ["Clients"],
+        "summary": "Update an Client",
+        "description": "Update Client in the System",
+        "parameters": [
+          {
+            "name": "client",
+            "description": "Client that we want to udpate",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#definitions/UpdateClient"
+            }
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Client is updated",
+            "schema": {
+              "$ref": "#definitions/Client"
+            }
+          }
+        }
+      }
+    },
     "/Invoices": {
       "post": {
         "tags": ["Invocies"],
@@ -204,6 +265,19 @@
           "type": "string",
           "uniqueItems": true
         },
+        "firstName": {
+          "type": "string"
+        },
+        "lastName": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        }
+      }
+    },
+    "UpdateClient": {
+      "properties": {
         "firstName": {
           "type": "string"
         },
