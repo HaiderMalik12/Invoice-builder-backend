@@ -12,12 +12,56 @@
     {
       "name": "Invocies",
       "description": "API for Inovice"
+    },
+    {
+      "name": "Clients",
+      "description": "API for Client"
     }
   ],
   "schemes": ["http"],
   "consumes": ["application/json"],
   "produces": ["application/json"],
   "paths": {
+    "/Clients": {
+      "post": {
+        "tags": ["Clients"],
+        "summary": "Create new Client",
+        "description": "Create new Client in the System",
+        "parameters": [
+          {
+            "name": "client",
+            "description": "client that we want to create",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#definitions/Client"
+            }
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "new client is created",
+            "schema": {
+              "$ref": "#definitions/Client"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": ["Clients"],
+        "summary": "FInd all Clients from the server",
+        "description": "All clients",
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "schema": {
+              "$ref": "#definitions/Clients"
+            }
+          }
+        }
+      }
+    },
     "/Invoices": {
       "post": {
         "tags": ["Invocies"],
@@ -169,6 +213,12 @@
         "email": {
           "type": "string"
         }
+      }
+    },
+    "Clients": {
+      "type": "array",
+      "items": {
+        "$ref": "#definitions/Client"
       }
     },
     "Invoice": {
