@@ -12,7 +12,7 @@ export const setGlobalMiddleware = app => {
   app.use(express.urlencoded({ extended: true }));
   app.use(cors());
   app.use(logger('dev'));
-  app.use(passport.initialize());
+  app.use(passport.initialize({ userProperty: 'currentUser' }));
   configureJWTStrategy();
   app.use(
     '/api-docs',

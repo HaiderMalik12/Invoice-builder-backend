@@ -43,6 +43,6 @@ export default {
     }
   },
   async test(req, res) {
-    return res.json(req.user);
+    return res.json(req.currentUser);
   },
 };
