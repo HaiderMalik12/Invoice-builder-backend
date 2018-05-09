@@ -10,11 +10,8 @@ export default {
       if (error && error.details) {
         return res.status(BAD_REQUEST).json(error);
       }
-      // enrypt the user password
-
-      // create new user
       const user = await User.create(value);
-      return res.json(user);
+      return res.json({ success: true, message: 'User create successfully' });
     } catch (err) {
       console.error(err);
       return res.status(INTERNAL_SERVER_ERROR).json(err);
