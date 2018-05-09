@@ -21,6 +21,8 @@
     "mongoose": "^5.0.15",
     "mongoose-paginate": "^5.0.3",
     "morgan": "^1.9.0",
+    "passport": "^0.4.0",
+    "passport-jwt": "^4.0.0",
     "swagger-ui-express": "^3.0.8"
   },
   "devDependencies": {
