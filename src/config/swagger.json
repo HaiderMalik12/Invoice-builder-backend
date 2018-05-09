@@ -16,12 +16,43 @@
     {
       "name": "Clients",
       "description": "API for Client"
+    },
+    {
+      "name": "Users",
+      "description": "API for Users"
     }
   ],
   "schemes": ["http"],
   "consumes": ["application/json"],
   "produces": ["application/json"],
   "paths": {
+    "/Users/signup": {
+      "post": {
+        "tags": ["Users"],
+        "summary": "Create new Account",
+        "description": "Create new User in the System",
+        "parameters": [
+          {
+            "name": "client",
+            "description": "user that we want to create",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#definitions/User"
+            }
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Signup Successful!",
+            "schema": {
+              "$ref": "#definitions/User"
+            }
+          }
+        }
+      }
+    },
     "/Clients": {
       "post": {
         "tags": ["Clients"],
@@ -258,6 +289,21 @@
     }
   },
   "definitions": {
+    "User": {
+      "required": ["email", "password"],
+      "properties": {
+        "_id": {
+          "type": "string",
+          "uniqueItems": true
+        },
+        "email": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        }
+      }
+    },
     "Client": {
       "required": ["firstName", "lastName", "email"],
       "properties": {

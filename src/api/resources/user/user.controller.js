@@ -13,7 +13,7 @@ export default {
         return res.status(BAD_REQUEST).json(error);
       }
       const user = await User.create(value);
-      return res.json({ success: true, message: 'User create successfully' });
+      return res.json({ success: true, message: 'User created successfully' });
     } catch (err) {
       console.error(err);
       return res.status(INTERNAL_SERVER_ERROR).json(err);
