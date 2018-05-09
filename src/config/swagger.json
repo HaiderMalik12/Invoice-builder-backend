@@ -94,6 +94,13 @@
             "schema": {
               "$ref": "#definitions/Client"
             }
+          },
+          {
+            "name": "authorization",
+            "description": "Access token to authorize the user",
+            "in": "header",
+            "type": "string",
+            "required": true
           }
         ],
         "produces": ["application/json"],
@@ -109,6 +116,15 @@
       "get": {
         "tags": ["Clients"],
         "summary": "FInd all Clients from the server",
+        "parameters": [
+          {
+            "name": "authorization",
+            "description": "Access token to authorize the user",
+            "in": "header",
+            "type": "string",
+            "required": true
+          }
+        ],
         "description": "All clients",
         "responses": {
           "200": {
@@ -127,6 +143,13 @@
           "in": "path",
           "description": "Id of the Client",
           "type": "string"
+        },
+        {
+          "name": "authorization",
+          "description": "Access token to authorize the user",
+          "in": "header",
+          "type": "string",
+          "required": true
         }
       ],
       "get": {
@@ -195,6 +218,13 @@
             "schema": {
               "$ref": "#definitions/Invoice"
             }
+          },
+          {
+            "name": "authorization",
+            "description": "Access token to authorize the user",
+            "in": "header",
+            "type": "string",
+            "required": true
           }
         ],
         "produces": ["application/json"],
@@ -241,6 +271,13 @@
             "type": "string",
             "description": "Define the sortDir ie. desc, asc",
             "in": "query"
+          },
+          {
+            "name": "authorization",
+            "description": "Access token to authorize the user",
+            "in": "header",
+            "type": "string",
+            "required": true
           }
         ],
         "responses": {
@@ -260,6 +297,13 @@
           "in": "path",
           "description": "Id of the Invoice",
           "type": "string"
+        },
+        {
+          "name": "authorization",
+          "description": "Access token to authorize the user",
+          "in": "header",
+          "type": "string",
+          "required": true
         }
       ],
       "get": {
