@@ -6,11 +6,12 @@ import cors from 'cors';
 
 import swaggerDocument from './config/swagger.json';
 import { restRouter } from './api';
+import { devConfig } from './config/env/development';
 
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://localhost/invoice-builder');
+mongoose.connect(`mongodb://localhost/${devConfig.database}`);
 const app = express();
-const PORT = 3000;
+const PORT = devConfig.port;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));

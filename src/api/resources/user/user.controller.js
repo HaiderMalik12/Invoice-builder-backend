@@ -3,6 +3,7 @@ import bcryptjs from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import userService from './user.service';
 import User from './user.model';
+import { devConfig } from '../../../config/env/development';
 
 export default {
   async signup(req, res) {
@@ -32,7 +33,9 @@ export default {
       if (!matched) {
         return res.status(UNAUTHORIZED).json({ err: 'invalid credentials' });
       }
-      const token = jwt.sign({ id: user._id }, 'ahgd123', { expiresIn: '1d' });
+      const token = jwt.sign({ id: user._id }, devConfig.secret, {
+        expiresIn: '1d',
+      });
       return res.json({ success: true, token });
     } catch (err) {
       console.error(err);
