@@ -33,7 +33,7 @@
         "description": "Create new User in the System",
         "parameters": [
           {
-            "name": "client",
+            "name": "user",
             "description": "user that we want to create",
             "in": "body",
             "required": true,
@@ -47,7 +47,34 @@
           "200": {
             "description": "Signup Successful!",
             "schema": {
+              "$ref": "#definitions/UserSignupRsp"
+            }
+          }
+        }
+      }
+    },
+    "/Users/login": {
+      "post": {
+        "tags": ["Users"],
+        "summary": "Login the account",
+        "description": "Login to the account",
+        "parameters": [
+          {
+            "name": "user",
+            "description": "user credentials",
+            "in": "body",
+            "required": true,
+            "schema": {
               "$ref": "#definitions/User"
+            }
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Login Successful!",
+            "schema": {
+              "$ref": "#definitions/UserLoginRsp"
             }
           }
         }
@@ -304,6 +331,27 @@
         }
       }
     },
+    "UserSignupRsp": {
+      "properties": {
+        "success": {
+          "type": "boolean"
+        },
+        "message": {
+          "type": "string"
+        }
+      }
+    },
+    "UserLoginRsp": {
+      "properties": {
+        "success": {
+          "type": "boolean"
+        },
+        "token": {
+          "type": "string"
+        }
+      }
+    },
+
     "Client": {
       "required": ["firstName", "lastName", "email"],
       "properties": {
