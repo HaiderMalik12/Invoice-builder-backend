@@ -1,1 +1,1 @@
-export * from './invoice.router';
+export { invoiceRouter } from './invoice.router';
