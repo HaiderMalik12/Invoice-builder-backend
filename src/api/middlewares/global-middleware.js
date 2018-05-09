@@ -5,6 +5,7 @@ import cors from 'cors';
 import passport from 'passport';
 
 import swaggerDocument from '../../config/swagger.json';
+import { configureJWTStrategy } from './passport-jwt';
 
 export const setGlobalMiddleware = app => {
   app.use(express.json());
@@ -12,6 +13,7 @@ export const setGlobalMiddleware = app => {
   app.use(cors());
   app.use(logger('dev'));
   app.use(passport.initialize());
+  configureJWTStrategy();
   app.use(
     '/api-docs',
     swaggerUi.serve,

@@ -1,4 +1,8 @@
-import { BAD_REQUEST, INTERNAL_SERVER_ERROR, UNAUTHORIZED } from 'http-status-codes';
+import {
+  BAD_REQUEST,
+  INTERNAL_SERVER_ERROR,
+  UNAUTHORIZED
+} from 'http-status-codes';
 import bcryptjs from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import userService from './user.service';
@@ -27,14 +31,16 @@ export default {
       }
       const user = await User.findOne({ email: value.email });
       if (!user) {
-        return res.status(BAD_REQUEST).json({ err: 'invalid email or password' });
+        return res
+          .status(BAD_REQUEST)
+          .json({ err: 'invalid email or password' });
       }
       const matched = bcryptjs.compare(value.password, user.password);
       if (!matched) {
         return res.status(UNAUTHORIZED).json({ err: 'invalid credentials' });
       }
       const token = jwt.sign({ id: user._id }, devConfig.secret, {
-        expiresIn: '1d',
+        expiresIn: '1d'
       });
       return res.json({ success: true, token });
     } catch (err) {
@@ -42,4 +48,7 @@ export default {
       return res.status(INTERNAL_SERVER_ERROR).json(err);
     }
   },
+  async test(req, res) {
+    return res.json(req.user);
+  }
 };
