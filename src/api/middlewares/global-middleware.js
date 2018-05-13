@@ -10,6 +10,7 @@ import { configureJWTStrategy } from './passport-jwt';
 import { configureGoogleStrategy } from './passport-google';
 import { devConfig } from '../../config/env/development';
 import User from '../resources/user/user.model';
+import { configureTwitterStrategy } from './passport-twitter';
 
 export const setGlobalMiddleware = app => {
   app.use(express.json());
@@ -20,13 +21,14 @@ export const setGlobalMiddleware = app => {
     session({
       secret: devConfig.secret,
       resave: true,
-      saveUninitialized: true,
+      saveUninitialized: true
     })
   );
   app.use(passport.initialize({ userProperty: 'currentUser' }));
   app.use(passport.session());
   configureJWTStrategy();
   configureGoogleStrategy();
+  configureTwitterStrategy();
 
   // save user into session
   // req.session.user = {userId}
@@ -43,8 +45,10 @@ export const setGlobalMiddleware = app => {
     '/api-docs',
     swaggerUi.serve,
     swaggerUi.setup(swaggerDocument, {
-      explorer: true,
+      explorer: true
     })
   );
-  app.get('/failure', (req, res) => res.redirect('http://localhost:4200/login'));
+  app.get('/failure', (req, res) =>
+    res.redirect('http://localhost:4200/login')
+  );
 };

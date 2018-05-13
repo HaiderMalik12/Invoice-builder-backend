@@ -7,7 +7,7 @@ import User from '../resources/user/user.model';
 //   Strategies in Passport require a `verify` function, which accept
 //   credentials (in this case, an accessToken, refreshToken, and Google
 //   profile), and invoke a callback with a user object.
-export const configureGoogleStrategy = () => {
+export const configureTwitterStrategy = () => {
   passport.use(
     new TwitterStrategy.Strategy(
       {
@@ -19,6 +19,7 @@ export const configureGoogleStrategy = () => {
         try {
           // find the user by twitter id
           const user = await User.findOne({ 'twitter.id': profile.id });
+          console.log(profile);
           if (user) {
             return done(null, user);
           }

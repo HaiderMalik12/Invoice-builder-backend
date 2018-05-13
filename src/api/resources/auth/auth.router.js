@@ -25,3 +25,12 @@ authRouter.get(
   passport.authenticate('google', { failureRedirect: '/failure' }),
   authController.sendJWTToken
 );
+
+// Twitter
+authRouter.get('/twitter', passport.authenticate('twitter'));
+
+authRouter.get(
+  '/twitter/callback',
+  passport.authenticate('twitter', { failureRedirect: '/failure' }),
+  authController.sendJWTToken
+);
