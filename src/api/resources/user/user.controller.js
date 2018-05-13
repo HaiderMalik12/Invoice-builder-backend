@@ -12,7 +12,12 @@ export default {
       if (error && error.details) {
         return res.status(BAD_REQUEST).json(error);
       }
-      const user = await User.create(value);
+      const user = await new User();
+      user.local.email = value.email;
+      const salt = await bcryptjs.genSalt();
+      const hash = await bcryptjs.hash(value.password, salt);
+      user.local.password = hash;
+      await user.save();
       return res.json({ success: true, message: 'User created successfully' });
     } catch (err) {
       console.error(err);
