@@ -34,3 +34,12 @@ authRouter.get(
   passport.authenticate('twitter', { failureRedirect: '/failure' }),
   authController.sendJWTToken
 );
+
+// Github
+authRouter.get('/github', passport.authenticate('github'));
+
+authRouter.get(
+  '/github/callback',
+  passport.authenticate('github', { failureRedirect: '/failure' }),
+  authController.sendJWTToken
+);
