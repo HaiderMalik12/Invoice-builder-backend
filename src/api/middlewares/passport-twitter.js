@@ -17,17 +17,12 @@ export const configureGoogleStrategy = () => {
       },
       async (token, tokenSecret, profile, done) => {
         try {
-          // find the user by google id
+          // find the user by twitter id
           const user = await User.findOne({ 'twitter.id': profile.id });
           if (user) {
-            // if user exit
-            // return this user
             return done(null, user);
           }
-
-          // otherwise create the user with google
           const newUser = new User({});
-          // save accessToken, email, displayName, id
           newUser.twitter.id = profile.id;
           newUser.twitter.token = token;
           newUser.twitter.displayName = profile.displayName;
