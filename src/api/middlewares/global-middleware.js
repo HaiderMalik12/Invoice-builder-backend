@@ -46,4 +46,5 @@ export const setGlobalMiddleware = app => {
       explorer: true,
     })
   );
+  app.get('/failure', (req, res) => res.redirect('http://localhost:4200/login'));
 };
