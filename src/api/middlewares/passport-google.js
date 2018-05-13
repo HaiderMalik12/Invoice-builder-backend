@@ -33,7 +33,7 @@ export const configureGoogleStrategy = () => {
           // otherwise create the user with google
           const newUser = new User({});
           // save accessToken, email, displayName, id
-          newUser.google.id = profile;
+          newUser.google.id = profile.id;
           newUser.google.token = accessToken;
           newUser.google.displayName = profile.displayName;
           newUser.google.email = profile.emails[0].value;
