@@ -25,6 +25,7 @@
     "passport": "^0.4.0",
     "passport-google-oauth": "^1.0.0",
     "passport-jwt": "^4.0.0",
+    "passport-twitter": "^1.0.4",
     "swagger-ui-express": "^3.0.8"
   },
   "devDependencies": {

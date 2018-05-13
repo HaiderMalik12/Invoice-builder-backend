@@ -12,5 +12,11 @@ const UserSchema = new Schema({
     displayName: String,
     token: String,
   },
+  twitter: {
+    username: String,
+    id: String,
+    token: String,
+    displayName: String,
+  },
 });
 export default mongoose.model('User', UserSchema);
