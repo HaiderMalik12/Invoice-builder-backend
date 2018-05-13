@@ -1,6 +1,7 @@
 import passport from 'passport';
 import GoogleStrategy from 'passport-google-oauth';
 import { devConfig } from '../../config/env/development';
+import User from '../resources/user/user.model';
 
 // Use the GoogleStrategy within Passport.
 //   Strategies in Passport require a `verify` function, which accept
@@ -14,19 +15,34 @@ export const configureGoogleStrategy = () => {
         clientSecret: devConfig.google.clientSecret,
         callbackURL: devConfig.google.callbackURL,
       },
-      (accessToken, refreshToken, profile, done) => {
-        //   User.findOrCreate({ googleId: profile.id }, (err, user) => done(err, user));
-        console.log('accessToken: ', accessToken);
-        console.log('refreshToken: ', refreshToken);
-        console.log('profile: ', profile);
+      async (accessToken, refreshToken, profile, done) => {
+        try {
+          //   User.findOrCreate({ googleId: profile.id }, (err, user) => done(err, user));
+          console.log('accessToken: ', accessToken);
+          console.log('refreshToken: ', refreshToken);
+          console.log('profile: ', profile);
 
-        // find the user by google id
-        // if user exit
-        // return this user
+          // find the user by google id
+          const user = await User.findOne({ 'google.id': profile.id });
+          if (user) {
+            // if user exit
+            // return this user
+            return done(null, user);
+          }
 
-        // otherwise create the user with google
-        // save accessToken, email, displayName, id
-        done(null, profile);
+          // otherwise create the user with google
+          const newUser = new User({});
+          // save accessToken, email, displayName, id
+          newUser.google.id = profile;
+          newUser.google.token = accessToken;
+          newUser.google.displayName = profile.displayName;
+          newUser.google.email = profile.emails[0].value;
+          await newUser.save();
+          done(null, newUser);
+        } catch (err) {
+          console.error(err);
+          return done(err);
+        }
       }
     )
   );

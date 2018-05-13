@@ -13,6 +13,12 @@ const UserSchema = new Schema({
     type: String,
     required: true,
   },
+  google: {
+    email: String,
+    id: String,
+    displayName: String,
+    token: String,
+  },
 });
 UserSchema.pre('save', async function() {
   // if user is modified or user is new

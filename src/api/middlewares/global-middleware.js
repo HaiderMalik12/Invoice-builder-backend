@@ -9,6 +9,7 @@ import swaggerDocument from '../../config/swagger.json';
 import { configureJWTStrategy } from './passport-jwt';
 import { configureGoogleStrategy } from './passport-google';
 import { devConfig } from '../../config/env/development';
+import User from '../resources/user/user.model';
 
 export const setGlobalMiddleware = app => {
   app.use(express.json());
@@ -30,11 +31,13 @@ export const setGlobalMiddleware = app => {
   // save user into session
   // req.session.user = {userId}
   passport.serializeUser((user, done) => {
-    done(null, user.id);
+    done(null, user._id);
   });
   // extract the userId from session
   passport.deserializeUser((id, done) => {
-    done(null, { id: 'Asdjhajksdhasd' });
+    User.findById(id, (err, user) => {
+      done(null, user);
+    });
   });
   app.use(
     '/api-docs',
