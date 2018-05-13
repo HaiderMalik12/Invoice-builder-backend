@@ -8,7 +8,7 @@ export const authRouter = express.Router();
 //   redirecting the user to google.com.  After authorization, Google
 //   will redirect the user back to this application at /auth/google/callback
 authRouter.get(
-  '/auth/google',
+  '/google',
   passport.authenticate('google', {
     scope: ['https://www.googleapis.com/auth/plus.login'],
   })
@@ -19,7 +19,7 @@ authRouter.get(
 //   request.  If authentication fails, the user will be redirected back to the
 //   login page.  Otherwise, the primary route function function will be called,
 //   which, in this example, will redirect the user to the home page.
-authRouter.get('/auth/google/callback', passport.authenticate('google', { failureRedirect: '/failure' }), (req, res) =>
+authRouter.get('/google/callback', passport.authenticate('google', { failureRedirect: '/failure' }), (req, res) =>
   // res.redirect('/');
   res.json({ msg: 'authenticated' })
 );
