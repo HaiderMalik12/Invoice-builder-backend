@@ -10,7 +10,7 @@ export const authRouter = express.Router();
 authRouter.get(
   '/google',
   passport.authenticate('google', {
-    scope: ['https://www.googleapis.com/auth/plus.login'],
+    scope: ['profile', 'email'],
   })
 );
 
