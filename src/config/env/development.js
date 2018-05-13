@@ -7,4 +7,9 @@ export const devConfig = {
     clientSecret: 's_iQ4OMsjPWPlZRHQplZOhCx',
     callbackURL: 'http://localhost:3000/api/auth/google/callback',
   },
+  twitter: {
+    consumerKey: 'dFRt0qpQ564CfsRj2Q8CzztdB',
+    consumerSecret: 'ymhQctr7r6FYTWKfcKG1FjPQGyHTTBdeIOvP8h3f301UpgA1VT',
+    callbackURL: 'http://localhost:3000/api/auth/twitter/callback',
+  },
 };
