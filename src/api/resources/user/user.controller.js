@@ -12,6 +12,10 @@ export default {
       if (error && error.details) {
         return res.status(BAD_REQUEST).json(error);
       }
+      const existingUser = await User.findOne({ 'local.email': value.email });
+      if (existingUser) {
+        return res.status(BAD_REQUEST).json({ err: 'You have already created account' });
+      }
       const user = await new User();
       user.local.email = value.email;
       const salt = await bcryptjs.genSalt();
