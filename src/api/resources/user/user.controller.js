@@ -34,7 +34,7 @@ export default {
       if (error && error.details) {
         return res.status(BAD_REQUEST).json(error);
       }
-      const user = await User.findOne({ email: value.email });
+      const user = await User.findOne({ 'local.email': value.email });
       if (!user) {
         return res.status(BAD_REQUEST).json({ err: 'invalid email or password' });
       }
