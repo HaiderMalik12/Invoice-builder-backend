@@ -11,4 +11,8 @@ export default {
   authenticate(req, res) {
     return res.send(true);
   },
+  logout(req, res) {
+    req.logout(); // remove the session and remove req.currentUser;
+    return res.json({ success: true });
+  },
 };
