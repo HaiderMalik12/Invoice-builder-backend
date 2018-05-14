@@ -8,7 +8,7 @@ export default {
     });
     res.redirect(`${devConfig.frontendURL}/dashboard/invoices/?token=${token}`);
   },
-  authenticate(req,res){
-    return true;
-  }
+  authenticate(req, res) {
+    return res.send(true);
+  },
 };
