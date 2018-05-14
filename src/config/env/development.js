@@ -2,6 +2,7 @@ export const devConfig = {
   port: 3000,
   database: 'invoice-builder',
   secret: 'AHSDEUIYEIUER',
+  frontendURL: 'http://localhost:4200',
   google: {
     clientId: '706785035459-ipo473bq6cb3hi64euurr741ocd42m26.apps.googleusercontent.com',
     clientSecret: 's_iQ4OMsjPWPlZRHQplZOhCx',
