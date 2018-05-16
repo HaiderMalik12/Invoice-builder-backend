@@ -93,7 +93,27 @@ export default {
   async download(req, res) {
     try {
       // return res.json({ msg: 'TODO: Download' });
-      const html = `<h1>Hello world</h1>`;
+      const templateBody = `
+       <h1>Hello I am body<h1>
+      `;
+      const html = `
+      <html>
+      <head>
+      <title> Invoice </title>
+      <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+       <style>
+       @import url(http://fonts.googleapis.com/css?family=Bree+Serif);
+       body, h1, h2, h3, h4, h5, h6{
+       font-family: 'Bree Serif', serif;
+       }
+       </style>
+      </head>
+
+      <body>
+         ${templateBody}
+      </body>
+      </html>
+      `;
       res.pdfFromHTML({
         filename: 'hello-world.pdf',
         htmlContent: html,
