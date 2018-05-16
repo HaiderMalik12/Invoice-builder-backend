@@ -92,7 +92,8 @@ export default {
   },
   async download(req, res) {
     try {
-      // return res.json({ msg: 'TODO: Download' });
+      const { id } = req.params;
+      const invoice = await Invoice.findById(id).populate('client');
       const templateBody = `
       <div class="container">
     <div class="row">
@@ -101,7 +102,7 @@ export default {
         <div class="col-xs-6 text-right">
             <h1>INVOICE</h1>
             <h1>
-                <small>Nodejs Invoice</small>
+                <small>${invoice.item}</small>
             </h1>
         </div>
     </div>
@@ -125,12 +126,12 @@ export default {
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h4>To :
-                        <a>Malik</a>
+                        <a>${invoice.client.firstName} ${invoice.client.lastName}</a>
                     </h4>
                 </div>
                 <div class="panel-body">
                     <p>
-                        malik@gmail.com
+                        ${invoice.client.email}
                         <br>
                     </p>
                 </div>
@@ -153,10 +154,10 @@ export default {
         </thead>
         <tbody>
             <tr>
-                <td>10</td>
-                <td>10</td>
+                <td>${invoice.qty}</td>
+                <td>${invoice.rate}</td>
                 <td>
-                    1
+                    ${invoice.tax}
                 </td>
             </tr>
         </tbody>
