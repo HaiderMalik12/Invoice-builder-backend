@@ -90,4 +90,7 @@ export default {
       .then(invoice => res.json(invoice))
       .catch(err => res.status(HttpStatus.INTERNAL_SERVER_ERROR).json(err));
   },
+  async download(req, res) {
+    return res.json({ msg: 'TODO: Download' });
+  },
 };

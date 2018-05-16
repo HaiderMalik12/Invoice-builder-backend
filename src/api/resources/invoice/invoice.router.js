@@ -13,3 +13,5 @@ invoiceRouter
   .put(passport.authenticate('jwt', { session: false }), invoiceController.update)
   .delete(passport.authenticate('jwt', { session: false }), invoiceController.delete)
   .get(passport.authenticate('jwt', { session: false }), invoiceController.findOne);
+
+invoiceRouter.get('/:id/download', invoiceController.download);
