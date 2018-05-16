@@ -91,6 +91,16 @@ export default {
       .catch(err => res.status(HttpStatus.INTERNAL_SERVER_ERROR).json(err));
   },
   async download(req, res) {
-    return res.json({ msg: 'TODO: Download' });
+    try {
+      // return res.json({ msg: 'TODO: Download' });
+      const html = `<h1>Hello world</h1>`;
+      res.pdfFromHTML({
+        filename: 'hello-world.pdf',
+        htmlContent: html,
+      });
+    } catch (err) {
+      console.error(err);
+      return res.status(500).send(err);
+    }
   },
 };
