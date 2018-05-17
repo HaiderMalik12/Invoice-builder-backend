@@ -3,6 +3,7 @@ import mongoose from 'mongoose';
 const { Schema } = mongoose;
 const UserSchema = new Schema({
   local: {
+    name: String,
     email: String,
     password: String,
   },

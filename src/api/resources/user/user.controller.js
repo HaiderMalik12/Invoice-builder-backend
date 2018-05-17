@@ -18,6 +18,7 @@ export default {
       }
       const user = await new User();
       user.local.email = value.email;
+      user.local.name = value.name;
       const salt = await bcryptjs.genSalt();
       const hash = await bcryptjs.hash(value.password, salt);
       user.local.password = hash;
