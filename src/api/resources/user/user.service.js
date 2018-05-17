@@ -15,4 +15,24 @@ export default {
     }
     return { value };
   },
+  getUser(user) {
+    const rsp = {};
+    if (user.local.email) {
+      rsp.name = user.local.name;
+      rsp.email = user.local.email;
+    }
+    if (user.google.email) {
+      rsp.name = user.google.displayName;
+      rsp.email = user.google.email;
+    }
+    if (user.github.email) {
+      rsp.name = user.github.displayName;
+      rsp.email = user.github.email;
+    }
+    if (user.twitter.username) {
+      rsp.name = user.twitter.displayName;
+      rsp.email = user.twitter.username;
+    }
+    return rsp;
+  },
 };

@@ -13,7 +13,7 @@ export default {
     subTotal = total + salesTax;
     return { total, subTotal };
   },
-  getTemplateBody(invoice, subTotal, total) {
+  getTemplateBody(invoice, subTotal, total, user) {
     const templateBody = `
     <div class="container">
   <div class="row">
@@ -31,12 +31,12 @@ export default {
           <div class="panel panel-default">
               <div class="panel-heading">
                   <h4>From:
-                      <a>Jane</a>
+                      <a>${user.name}</a>
                   </h4>
               </div>
               <div class="panel-body">
                   <p>
-                      jane_doe@gmail.com
+                      ${user.email}
                       <br>
                   </p>
               </div>

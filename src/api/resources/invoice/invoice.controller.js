@@ -2,6 +2,7 @@ import Joi from 'joi';
 import HttpStatus, { NOT_FOUND } from 'http-status-codes';
 import Invoice from './invoice.model';
 import invoiceService from './invoice.service';
+import userService from '../user/user.service';
 
 export default {
   findAll(req, res, next) {
@@ -99,7 +100,8 @@ export default {
         return res.status(NOT_FOUND).send({ err: 'could not find any invice' });
       }
       const { subTotal, total } = invoiceService.getTotal(invoice);
-      const templateBody = invoiceService.getTemplateBody(invoice, subTotal, total);
+      const user = userService.getUser(req.currentUser);
+      const templateBody = invoiceService.getTemplateBody(invoice, subTotal, total, user);
       const html = invoiceService.getInvoiceTemplate(templateBody);
       res.pdfFromHTML({
         filename: `${invoice.item}.pdf`,
