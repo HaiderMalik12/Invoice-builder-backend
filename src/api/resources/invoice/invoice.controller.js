@@ -1,6 +1,7 @@
 import Joi from 'joi';
 import HttpStatus from 'http-status-codes';
 import Invoice from './invoice.model';
+import invoiceService from './invoice.service';
 
 export default {
   findAll(req, res, next) {
@@ -94,6 +95,7 @@ export default {
     try {
       const { id } = req.params;
       const invoice = await Invoice.findById(id).populate('client');
+      const { subTotal, total } = invoiceService.getTotal(invoice);
       const templateBody = `
       <div class="container">
     <div class="row">
@@ -175,9 +177,9 @@ export default {
         </div>
         <div class="col-xs-2">
             <strong>
-                $100
-                <br> $200
-                <br> $300
+                $${subTotal}
+                <br> $${invoice.tax}
+                <br> $${total}
                 <br>
             </strong>
         </div>
