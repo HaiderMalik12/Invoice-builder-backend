@@ -42,9 +42,9 @@ export default {
       rsp.name = user.github.displayName;
       rsp.email = user.github.email;
     }
-    if (user.twitter.username) {
+    if (user.twitter.email) {
       rsp.name = user.twitter.displayName;
-      rsp.email = user.twitter.username;
+      rsp.email = user.twitter.email;
     }
     return rsp;
   },
