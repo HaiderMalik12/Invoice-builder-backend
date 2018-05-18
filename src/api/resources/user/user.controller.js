@@ -8,7 +8,7 @@ import { devConfig } from '../../../config/env/development';
 export default {
   async signup(req, res) {
     try {
-      const { error, value } = userService.validateSchema(req.body);
+      const { error, value } = userService.validateSignupSchema(req.body);
       if (error && error.details) {
         return res.status(BAD_REQUEST).json(error);
       }
@@ -31,7 +31,7 @@ export default {
   },
   async login(req, res) {
     try {
-      const { error, value } = userService.validateSchema(req.body);
+      const { error, value } = userService.validateLoginSchema(req.body);
       if (error && error.details) {
         return res.status(BAD_REQUEST).json(error);
       }
