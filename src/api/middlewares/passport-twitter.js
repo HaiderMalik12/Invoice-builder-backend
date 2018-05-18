@@ -14,12 +14,15 @@ export const configureTwitterStrategy = () => {
         consumerKey: devConfig.twitter.consumerKey,
         consumerSecret: devConfig.twitter.consumerSecret,
         callbackURL: devConfig.twitter.callbackURL,
+        userProfileURL: devConfig.twitter.userProfileURL,
+        passReqToCallback: true,
       },
-      async (token, tokenSecret, profile, done) => {
+      async (req, token, tokenSecret, profile, done) => {
         try {
           // find the user by twitter id
+          // console.log(profile.emails[0].value);
           const user = await User.findOne({ 'twitter.id': profile.id });
-          console.log(profile);
+          // console.log(profile);
           if (user) {
             return done(null, user);
           }
@@ -28,6 +31,7 @@ export const configureTwitterStrategy = () => {
           newUser.twitter.token = token;
           newUser.twitter.displayName = profile.displayName;
           newUser.twitter.username = profile.username;
+          newUser.twitter.email = profile.emails[0].value;
           await newUser.save();
           done(null, newUser);
         } catch (err) {

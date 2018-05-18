@@ -9,9 +9,10 @@ export const devConfig = {
     callbackURL: 'http://localhost:3000/api/auth/google/callback',
   },
   twitter: {
-    consumerKey: 'dFRt0qpQ564CfsRj2Q8CzztdB',
-    consumerSecret: 'ymhQctr7r6FYTWKfcKG1FjPQGyHTTBdeIOvP8h3f301UpgA1VT',
+    consumerKey: 'tDpiVQhiwC9eOX9DoNUjXPLBW',
+    consumerSecret: 'AGrY6fRkPQfbj6uPpI3JANbvbsnuCsgOMn9W9BLXXCDDIRIaLx',
     callbackURL: 'http://localhost:3000/api/auth/twitter/callback',
+    userProfileURL: 'https://api.twitter.com/1.1/account/verify_credentials.json?include_email=true',
   },
   github: {
     clientId: '79bdab1805aa121cda61',
