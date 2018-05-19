@@ -4,7 +4,7 @@ import jwt from 'jsonwebtoken';
 import userService from './user.service';
 import User from './user.model';
 import { devConfig } from '../../../config/env/development';
-import { getJWTToken } from '../../modules/util';
+import { getJWTToken, getEncryptedPassword } from '../../modules/util';
 import { sendEmail } from '../../modules/mail';
 
 export default {
@@ -89,6 +89,27 @@ export default {
         email: sanitizedUser.email,
       });
       return res.json(results);
+    } catch (err) {
+      console.error(err);
+      return res.status(INTERNAL_SERVER_ERROR).json(err);
+    }
+  },
+  async resetPassword(req, res) {
+    try {
+      const { password } = req.body;
+      if (!password) {
+        return res.status(BAD_REQUEST).json({ err: 'password is required' });
+      }
+      const user = await User.findById(req.currentUser._id);
+      const sanitizedUser = userService.getUser(user);
+      if (!user.local.email) {
+        user.local.email = sanitizedUser.email;
+        user.local.name = sanitizedUser.name;
+      }
+      const hash = await getEncryptedPassword(password);
+      user.local.password = hash;
+      await user.save();
+      return res.json({ success: true });
     } catch (err) {
       console.error(err);
       return res.status(INTERNAL_SERVER_ERROR).json(err);
