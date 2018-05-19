@@ -55,4 +55,16 @@ export default {
   async test(req, res) {
     return res.json(req.currentUser);
   },
+  async forgotPassword(req, res) {
+    try {
+      const { value, error } = userService.validateForgotSchema(req.body);
+      if (error && error.details) {
+        return res.status(BAD_REQUEST).json(error);
+      }
+      return res.json(value);
+    } catch (err) {
+      console.error(err);
+      return res.status(INTERNAL_SERVER_ERROR).json(err);
+    }
+  },
 };
