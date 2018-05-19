@@ -70,7 +70,7 @@ export default {
           { 'local.email': value.email },
         ],
       };
-      const user = User.findOne(criteria);
+      const user = await User.findOne(criteria);
       if (!user) {
         return res.status(NOT_FOUND).json({ err: 'could not find user' });
       }
