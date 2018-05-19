@@ -1,9 +1,10 @@
-import { BAD_REQUEST, INTERNAL_SERVER_ERROR, UNAUTHORIZED } from 'http-status-codes';
+import { BAD_REQUEST, INTERNAL_SERVER_ERROR, UNAUTHORIZED, NOT_FOUND } from 'http-status-codes';
 import bcryptjs from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import userService from './user.service';
 import User from './user.model';
 import { devConfig } from '../../../config/env/development';
+import { getJWTToken } from '../../modules/util';
 
 export default {
   async signup(req, res) {
@@ -61,7 +62,26 @@ export default {
       if (error && error.details) {
         return res.status(BAD_REQUEST).json(error);
       }
-      return res.json(value);
+      const criteria = {
+        $or: [
+          { 'google.email': value.email },
+          { 'github.email': value.email },
+          { 'twitter.email': value.email },
+          { 'local.email': value.email },
+        ],
+      };
+      const user = User.findOne(criteria);
+      if (!user) {
+        return res.status(NOT_FOUND).json({ err: 'could not find user' });
+      }
+      const token = getJWTToken({ id: user._id });
+
+      const resetLink = `
+       <h4> Please click on the link to reset the password
+
+       <a href ='${devConfig.frontendURL}/reset-password/${token}'
+      `;
+      return res.json(resetLink);
     } catch (err) {
       console.error(err);
       return res.status(INTERNAL_SERVER_ERROR).json(err);
