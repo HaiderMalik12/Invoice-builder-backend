@@ -5,6 +5,7 @@ import userService from './user.service';
 import User from './user.model';
 import { devConfig } from '../../../config/env/development';
 import { getJWTToken } from '../../modules/util';
+import { sendEmail } from '../../modules/mail';
 
 export default {
   async signup(req, res) {
@@ -77,11 +78,17 @@ export default {
       const token = getJWTToken({ id: user._id });
 
       const resetLink = `
-       <h4> Please click on the link to reset the password
+       <h4> Please click on the link to reset the password </h4>
 
-       <a href ='${devConfig.frontendURL}/reset-password/${token}'
+       <a href ='${devConfig.frontendURL}/reset-password/${token}'>Reset Password</a>
       `;
-      return res.json(resetLink);
+      const sanitizedUser = userService.getUser(user);
+      const results = await sendEmail({
+        html: resetLink,
+        subject: 'Forgot Password',
+        email: sanitizedUser.email,
+      });
+      return res.json(results);
     } catch (err) {
       console.error(err);
       return res.status(INTERNAL_SERVER_ERROR).json(err);
